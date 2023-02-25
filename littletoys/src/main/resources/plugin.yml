@@ -1,0 +1,7 @@
+name: LittleToys
+version: '${project.version}'
+main: snw.rfm.littletoys.Main
+api-version: 1.16
+description: Just a collection of little toys for "Run For Money in Minecraft"...
+softdepend:
+  - RunForMoney # v2 is required
