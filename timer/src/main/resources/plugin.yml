@@ -1,0 +1,17 @@
+name: CountGame
+version: '${project.version}'
+main: snw.countgame.CountGame
+api-version: 1.16
+authors: [ SNWCreations ]
+description: Nothing here yet. lol
+website: https://www.mcbbs.net/home.php?mod=space&uid=2190885
+
+commands:
+  cgc:
+    description: "开始/结束 默数。"
+    usage: "/hg_count"
+  cgok:
+    description: "如果你确定逃走队员们的默数没有问题，执行此命令以通知他们。此命令执行后会删除现有计时器，从而为下一个逃走队员进行默数做准备。"
+    usage: "/hg_ok"
+    permission-message: "§c只有管理员可以这么做。"
+    permission: op
