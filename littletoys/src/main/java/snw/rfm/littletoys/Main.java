@@ -63,6 +63,7 @@ public final class Main extends JavaPlugin implements Listener {
     private void init() {
         itemDropDispatcher.register(speedBlock, (player, stack) -> player.addPotionEffect(SPEED));
         itemDropDispatcher.register(invisibilityBlock, (player, stack) -> player.addPotionEffect(INVISIBLE));
+        getServer().getPluginManager().registerEvents(itemDropDispatcher, this);
 
 //        if (getServer().getPluginManager().getPlugin("RunForMoney2") != null) {
 //            initRFMSystem();
