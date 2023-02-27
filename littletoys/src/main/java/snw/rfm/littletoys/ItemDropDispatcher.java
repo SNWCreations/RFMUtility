@@ -26,11 +26,14 @@ class ItemDropDispatcher implements Listener {
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
-    public void onClick(PlayerDropItemEvent e) {
+    public void onDrop(PlayerDropItemEvent e) {
         if (main.serviceProvider.isRunner(e.getPlayer())) {
             ItemStack itemStack = e.getItemDrop().getItemStack();
             Optional.ofNullable(callbackMap.get(toRealKey(itemStack)))
-                    .ifPresent(i -> i.onClick(e.getPlayer(), itemStack));
+                    .ifPresent(i -> {
+                        i.onClick(e.getPlayer(), itemStack);
+                        main.getServer().getScheduler().runTaskLater(main, () -> e.getItemDrop().remove(), 1L);
+                    );
         }
     }
 
