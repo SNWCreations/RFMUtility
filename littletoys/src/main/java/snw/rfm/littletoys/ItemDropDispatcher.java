@@ -33,7 +33,7 @@ class ItemDropDispatcher implements Listener {
                     .ifPresent(i -> {
                         i.onClick(e.getPlayer(), itemStack);
                         main.getServer().getScheduler().runTaskLater(main, () -> e.getItemDrop().remove(), 1L);
-                    );
+                    });
         }
     }
 
