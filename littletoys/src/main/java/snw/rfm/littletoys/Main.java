@@ -128,7 +128,7 @@ public final class Main extends JavaPlugin implements Listener {
         if (e.getEntity() instanceof Snowball) {
             if (e.getHitEntity() instanceof Player) {
                 Player hitPlayer = (Player) e.getHitEntity();
-                ItemStack item = ((Snowball) e).getItem();
+                ItemStack item = ((Snowball) e.getEntity()).getItem();
                 if (snowball.isSimilar(item)) {
                     if (isHunter(hitPlayer)) {
                         new PlayerSlow(this, hitPlayer).start();
