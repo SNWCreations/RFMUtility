@@ -125,7 +125,7 @@ public final class Main extends JavaPlugin implements Listener {
 
     @EventHandler
     public void onProjectileHit(ProjectileHitEvent e) {
-        if (e instanceof Snowball) {
+        if (e.getEntity() instanceof Snowball) {
             if (e.getHitEntity() instanceof Player) {
                 Player hitPlayer = (Player) e.getHitEntity();
                 ItemStack item = ((Snowball) e).getItem();
