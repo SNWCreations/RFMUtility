@@ -48,7 +48,7 @@ public final class Main extends JavaPlugin implements Listener {
     private void init() {
         // region init item
         snowball = new ItemBuilder(Material.SNOWBALL)
-                .setDisplayName(ChatColor.RED + "冰冻球")
+                .setDisplayName(ChatColor.BOLD + "" + ChatColor.RED + "冰冻球")
                 .setLore(ChatColor.GREEN + "使被击中的猎人被冰冻 5 秒，在此期间猎人的抓捕行为无效。")
                 .toItemStack();
         ItemMeta meta = snowball.getItemMeta();
@@ -56,7 +56,7 @@ public final class Main extends JavaPlugin implements Listener {
         snowball.setItemMeta(meta);
 
         ItemStack speedBlock = new ItemBuilder(Material.DIAMOND_BLOCK)
-                .setDisplayName("速度方块")
+                .setDisplayName(ChatColor.BOLD + "" + ChatColor.BLUE + "速度方块")
                 .setLore(
                         ChatColor.BLUE + "速度 III (0:05)",
                         "",
@@ -64,7 +64,7 @@ public final class Main extends JavaPlugin implements Listener {
                 )
                 .toItemStack();
         ItemStack invisibilityBlock = new ItemBuilder(Material.GRAY_CONCRETE)
-                .setDisplayName("隐身方块")
+                .setDisplayName(ChatColor.BOLD + "隐身方块")
                 .setLore(
                         ChatColor.BLUE + "隐身 (0:10)",
                         "",
