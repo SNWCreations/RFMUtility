@@ -1,5 +1,6 @@
 package snw.rfm.littletoys.item;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -19,7 +20,7 @@ public class ItemBuilder {
     }
 
     public ItemBuilder setDisplayName(String displayName) {
-        modifyMeta(i -> i.setDisplayName(displayName));
+        modifyMeta(i -> i.setDisplayName(ChatColor.RESET + displayName));
         return this;
     }
 
