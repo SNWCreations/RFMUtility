@@ -66,7 +66,7 @@ public final class Main extends JavaPlugin implements Listener {
         // endregion
 
         ItemRegistry.MAP.put("speed_block", speedBlock);
-        ItemRegistry.MAP.put("invisiblity_block", invisibilityBlock);
+        ItemRegistry.MAP.put("invisibility_block", invisibilityBlock);
         ItemRegistry.MAP.put("snowball", snowball);
 
 //        if (getServer().getPluginManager().getPlugin("RunForMoney2") != null) {
