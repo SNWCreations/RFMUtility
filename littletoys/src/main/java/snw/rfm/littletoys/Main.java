@@ -21,8 +21,8 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener {
-    private static final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, 30, 2, false, false);
-    private static final PotionEffect INVISIBLE = new PotionEffect(PotionEffectType.INVISIBILITY, 10, 1, false, false);
+    private static final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, 5 * 20, 2, false, false);
+    private static final PotionEffect INVISIBLE = new PotionEffect(PotionEffectType.INVISIBILITY, 10 * 20, 1, false, false);
     private ItemStack snowball;
     ServiceProvider serviceProvider;
     ItemDropDispatcher itemDropDispatcher;
