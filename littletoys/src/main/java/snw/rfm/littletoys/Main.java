@@ -69,25 +69,25 @@ public final class Main extends JavaPlugin implements Listener {
         ItemRegistry.MAP.put("invisiblity_block", invisibilityBlock);
         ItemRegistry.MAP.put("snowball", snowball);
 
+//        if (getServer().getPluginManager().getPlugin("RunForMoney2") != null) {
+//            initRFMService();
+//        } else {
+//            initInternalService();
+//        }
+        initInternalService();
+
         itemDropDispatcher.register(speedBlock, (player, stack) -> player.addPotionEffect(SPEED));
         itemDropDispatcher.register(invisibilityBlock, (player, stack) -> player.addPotionEffect(INVISIBLE));
         getServer().getPluginManager().registerEvents(itemDropDispatcher, this);
         getCommand("littletoy").setExecutor(this);
-
-//        if (getServer().getPluginManager().getPlugin("RunForMoney2") != null) {
-//            initRFMSystem();
-//        } else {
-//            initInternalSystem();
-//        }
-        initInternalSystem();
     }
 
-    private void initInternalSystem() {
+    private void initInternalService() {
         // getLogger().warning("未检测到有效的 RunForMoney 插件 (要求版本 v2.x)，正在注册纯原版实现...");
         serviceProvider = new InternalServiceProvider();
     }
 
-    private void initRFMSystem() {
+    private void initRFMService() {
         // TODO
     }
 
