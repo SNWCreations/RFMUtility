@@ -2,6 +2,7 @@ package snw.rfm.littletoys;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -11,6 +12,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -21,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener {
+    private NamespacedKey SNOWBALL_KEY = new NamespacedKey(this, "snowball");
     private static final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, 5 * 20, 2, false, false);
     private static final PotionEffect INVISIBLE = new PotionEffect(PotionEffectType.INVISIBILITY, 10 * 20, 1, false, false);
     private ItemStack snowball;
@@ -47,6 +51,10 @@ public final class Main extends JavaPlugin implements Listener {
                 .setDisplayName(ChatColor.RED + "冰冻球")
                 .setLore(ChatColor.GREEN + "使被击中的猎人被冰冻 5 秒，在此期间猎人的抓捕行为无效。")
                 .toItemStack();
+        ItemMeta meta = snowball.getItemMeta();
+        meta.getPersistentDataContainer().set(SNOWBALL_KEY, PersistentDataType.INTEGER, 1);
+        snowball.setItemMeta(meta);
+
         ItemStack speedBlock = new ItemBuilder(Material.DIAMOND_BLOCK)
                 .setDisplayName("速度方块")
                 .setLore(
@@ -129,7 +137,7 @@ public final class Main extends JavaPlugin implements Listener {
             if (e.getHitEntity() instanceof Player) {
                 Player hitPlayer = (Player) e.getHitEntity();
                 ItemStack item = ((Snowball) e.getEntity()).getItem();
-                if (snowball.isSimilar(item)) {
+                if (item.getItemMeta().getPersistentDataContainer().has(SNOWBALL_KEY, PersistentDataType.INTEGER)) {
                     if (isHunter(hitPlayer)) {
                         new PlayerSlow(this, hitPlayer).start();
                         serviceProvider.freeze(hitPlayer);
