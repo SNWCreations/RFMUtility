@@ -116,7 +116,7 @@ public final class Main extends JavaPlugin implements Listener {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (sender instanceof Player) {
-            if (args.length == 0) {
+            if (args.length == 0 || args.length == 1) {
                 return new ArrayList<>(ItemRegistry.MAP.keySet());
             }
         }
