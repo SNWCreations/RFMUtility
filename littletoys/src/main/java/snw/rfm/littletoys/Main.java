@@ -11,6 +11,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.ProjectileHitEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -129,6 +130,12 @@ public final class Main extends JavaPlugin implements Listener {
             }
         }
         return Collections.emptyList();
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        event.getPlayer().sendMessage(ChatColor.GREEN + "此服务器正在运行 LittleToys 道具插件，版本 " + getDescription().getVersion());
+        event.getPlayer().sendMessage(ChatColor.GREEN + "作者: ZX夏夜之风 (B站 UID: 57486712)");
     }
 
     @EventHandler
