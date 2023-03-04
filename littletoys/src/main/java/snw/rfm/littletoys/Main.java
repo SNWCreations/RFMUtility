@@ -24,37 +24,12 @@ public final class Main extends JavaPlugin implements Listener {
     private static final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, 30, 2, false, false);
     private static final PotionEffect INVISIBLE = new PotionEffect(PotionEffectType.INVISIBILITY, 10, 1, false, false);
     private ItemStack snowball;
-    private ItemStack speedBlock;
-    private ItemStack invisibilityBlock;
     ServiceProvider serviceProvider;
     ItemDropDispatcher itemDropDispatcher;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
-        // region init item
-        snowball = new ItemBuilder(Material.SNOWBALL)
-                .setDisplayName(ChatColor.RED + "冰冻球")
-                .setLore(ChatColor.GREEN + "使被击中的猎人被冰冻 5 秒，在此期间猎人的抓捕行为无效。")
-                .toItemStack();
-        speedBlock = new ItemBuilder(Material.DIAMOND_BLOCK)
-                .setDisplayName("速度方块")
-                .setLore(
-                        ChatColor.BLUE + "速度 III (0:05)",
-                        "",
-                        ChatColor.GREEN + "这是瞬间生效的药水！扔出 (一般为 Q 键) 即可！"
-                )
-                .toItemStack();
-        invisibilityBlock = new ItemBuilder(Material.GRAY_CONCRETE)
-                .setDisplayName("隐身方块")
-                .setLore(
-                        ChatColor.BLUE + "隐身 (0:10)",
-                        "",
-                        ChatColor.GREEN + "这是瞬间生效的药水！扔出 (一般为 Q 键) 即可！"
-                )
-                .toItemStack();
-        // endregion
-
         itemDropDispatcher = new ItemDropDispatcher(this);
         init();
         getServer().getPluginManager().registerEvents(this, this);
@@ -67,6 +42,29 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     private void init() {
+        // region init item
+        snowball = new ItemBuilder(Material.SNOWBALL)
+                .setDisplayName(ChatColor.RED + "冰冻球")
+                .setLore(ChatColor.GREEN + "使被击中的猎人被冰冻 5 秒，在此期间猎人的抓捕行为无效。")
+                .toItemStack();
+        ItemStack speedBlock = new ItemBuilder(Material.DIAMOND_BLOCK)
+                .setDisplayName("速度方块")
+                .setLore(
+                        ChatColor.BLUE + "速度 III (0:05)",
+                        "",
+                        ChatColor.GREEN + "这是瞬间生效的药水！扔出 (一般为 Q 键) 即可！"
+                )
+                .toItemStack();
+        ItemStack invisibilityBlock = new ItemBuilder(Material.GRAY_CONCRETE)
+                .setDisplayName("隐身方块")
+                .setLore(
+                        ChatColor.BLUE + "隐身 (0:10)",
+                        "",
+                        ChatColor.GREEN + "这是瞬间生效的药水！扔出 (一般为 Q 键) 即可！"
+                )
+                .toItemStack();
+        // endregion
+
         ItemRegistry.MAP.put("speed_block", speedBlock);
         ItemRegistry.MAP.put("invisiblity_block", invisibilityBlock);
         ItemRegistry.MAP.put("snowball", snowball);
