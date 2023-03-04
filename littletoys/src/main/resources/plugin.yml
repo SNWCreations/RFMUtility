@@ -5,3 +5,8 @@ api-version: 1.16
 description: Just a collection of little toys for "Run For Money in Minecraft"...
 softdepend:
   - RunForMoney2 # v2 is required
+
+commands:
+  littletoy:
+    usage: "/littletoy <item_name>"
+    permission: op

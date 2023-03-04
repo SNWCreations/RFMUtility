@@ -2,6 +2,8 @@ package snw.rfm.littletoys;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Snowball;
 import org.bukkit.event.EventHandler;
@@ -13,6 +15,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import snw.rfm.littletoys.item.ItemBuilder;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public final class Main extends JavaPlugin implements Listener {
     private static final PotionEffect SPEED = new PotionEffect(PotionEffectType.SPEED, 30, 2, false, false);
@@ -61,9 +67,14 @@ public final class Main extends JavaPlugin implements Listener {
     }
 
     private void init() {
+        ItemRegistry.MAP.put("speed_block", speedBlock);
+        ItemRegistry.MAP.put("invisiblity_block", invisibilityBlock);
+        ItemRegistry.MAP.put("snowball", snowball);
+
         itemDropDispatcher.register(speedBlock, (player, stack) -> player.addPotionEffect(SPEED));
         itemDropDispatcher.register(invisibilityBlock, (player, stack) -> player.addPotionEffect(INVISIBLE));
         getServer().getPluginManager().registerEvents(itemDropDispatcher, this);
+        getCommand("littletoy").setExecutor(this);
 
 //        if (getServer().getPluginManager().getPlugin("RunForMoney2") != null) {
 //            initRFMSystem();
@@ -84,6 +95,34 @@ public final class Main extends JavaPlugin implements Listener {
 
     private boolean isHunter(Player player) {
         return serviceProvider.isHunter(player);
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        if (sender instanceof Player) {
+            if (args.length == 0) {
+                sender.sendMessage(ChatColor.RED + "需要一个参数。");
+                return false;
+            }
+            if (ItemRegistry.MAP.containsKey(args[0])) {
+                ((Player) sender).getInventory().addItem(ItemRegistry.MAP.get(args[0]));
+            } else {
+                sender.sendMessage(ChatColor.RED + "找不到物品。");
+            }
+        } else {
+            sender.sendMessage(ChatColor.RED + "不支持的执行者类型。要求是玩家。");
+        }
+        return true;
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+        if (sender instanceof Player) {
+            if (args.length == 0) {
+                return new ArrayList<>(ItemRegistry.MAP.keySet());
+            }
+        }
+        return Collections.emptyList();
     }
 
     @EventHandler

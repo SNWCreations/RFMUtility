@@ -22,14 +22,14 @@ class ItemDropDispatcher implements Listener {
     }
 
     public void register(ItemStack stack, DropCallback callback) {
-        this.callbackMap.put(toRealKey(stack), callback);
+        this.callbackMap.put(ItemRegistry.toRealKey(stack), callback);
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onDrop(PlayerDropItemEvent e) {
         if (main.serviceProvider.isRunner(e.getPlayer())) {
             ItemStack itemStack = e.getItemDrop().getItemStack();
-            Optional.ofNullable(callbackMap.get(toRealKey(itemStack)))
+            Optional.ofNullable(callbackMap.get(ItemRegistry.toRealKey(itemStack)))
                     .ifPresent(i -> {
                         i.onClick(e.getPlayer(), itemStack);
                         main.getServer().getScheduler().runTaskLater(main, () -> e.getItemDrop().remove(), 1L);
@@ -37,9 +37,4 @@ class ItemDropDispatcher implements Listener {
         }
     }
 
-    private static ItemStack toRealKey(ItemStack st) {
-        ItemStack result = st.clone();
-        result.setAmount(1);
-        return result;
-    }
 }
